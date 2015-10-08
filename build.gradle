@@ -8,6 +8,7 @@
  */
 
 apply plugin: 'java'
+apply plugin: 'war'
 
 description = 'Spring Security Token-based API Authentication'
 
@@ -18,8 +19,10 @@ repositories {
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.7'
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
     compile 'org.springframework.security:spring-security-web:4.0.2.RELEASE'
     compile 'org.springframework.security:spring-security-config:4.0.2.RELEASE'
+    compile 'org.apache.commons:commons-lang3:3.4'
     testCompile "junit:junit:4.11"
 }
 
