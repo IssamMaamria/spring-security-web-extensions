@@ -28,9 +28,9 @@ import java.io.IOException;
  *         <p>
  *         07/10/15.
  */
-public class ApiTokenValidationFilter extends GenericFilterBean {
+public class ApiTokenValidationFilter2 extends GenericFilterBean {
 
-    private static final Logger log = LoggerFactory.getLogger(ApiTokenValidationFilter.class);
+    private static final Logger log = LoggerFactory.getLogger(ApiTokenValidationFilter2.class);
 
     private ApiSecurityConfig apiSecurityConfig = new DefaultApiSecurityConfig();
 
