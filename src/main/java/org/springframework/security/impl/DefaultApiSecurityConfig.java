@@ -10,21 +10,6 @@ import org.springframework.security.ApiSecurityConfig;
 public class DefaultApiSecurityConfig implements ApiSecurityConfig {
 
     @Override
-    public String authHeaderName() {
-        return "X-Auth-Token";
-    }
-
-    @Override
-    public String usernamePropertyName() {
-        return "username";
-    }
-
-    @Override
-    public String passwordPropertyName() {
-        return "password";
-    }
-
-    @Override
     public String loginEndpoint() {
         return "login";
     }
@@ -32,5 +17,10 @@ public class DefaultApiSecurityConfig implements ApiSecurityConfig {
     @Override
     public String validationEndpoint() {
         return "validate";
+    }
+
+    @Override
+    public String logoutEndpoint() {
+        return "logout";
     }
 }

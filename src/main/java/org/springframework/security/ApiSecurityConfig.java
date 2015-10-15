@@ -7,13 +7,9 @@ package org.springframework.security;
  */
 public interface ApiSecurityConfig {
 
-    String authHeaderName();
-
-    String usernamePropertyName();
-
-    String passwordPropertyName();
-
     String loginEndpoint();
 
     String validationEndpoint();
+
+    String logoutEndpoint();
 }

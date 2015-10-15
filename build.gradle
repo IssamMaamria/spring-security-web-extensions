@@ -9,6 +9,10 @@
 
 apply plugin: 'java'
 apply plugin: 'war'
+apply plugin: "groovy"
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 description = 'Spring Security Token-based API Authentication'
 
@@ -24,5 +28,8 @@ dependencies {
     compile 'org.springframework.security:spring-security-config:4.0.2.RELEASE'
     compile 'org.apache.commons:commons-lang3:3.4'
     testCompile "junit:junit:4.11"
+    testCompile 'com.fasterxml.jackson.core:jackson-core:2.5.3'
+    testCompile 'com.fasterxml.jackson.core:jackson-databind:2.5.3'
+    testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
 }
 

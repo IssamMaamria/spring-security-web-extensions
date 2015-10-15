@@ -6,8 +6,7 @@ import org.springframework.security.ApiSecurityConfig;
 import org.springframework.security.authentication.ApiAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.token.TokenExtractionService;
-import org.springframework.security.authentication.token.impl.HeaderTokenExtractionService;
+import org.springframework.security.authentication.token.TokenService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,7 +36,7 @@ public class ApiTokenValidationFilter extends GenericFilterBean {
 
     private AuthenticationManager authenticationManager;
 
-    private TokenExtractionService tokenExtractionService = new HeaderTokenExtractionService();
+    private TokenService tokenService;
 
     private AuthenticationSuccessHandler authenticationSuccessHandler;
 
@@ -51,7 +50,7 @@ public class ApiTokenValidationFilter extends GenericFilterBean {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         ApiAuthenticationToken accessToken = null;
         try {
-            accessToken = tokenExtractionService.extractAccessToken(httpRequest);
+            accessToken = tokenService.extractAccessToken(httpRequest);
             if(accessToken != null){
                 log.debug("Access token found: {}", accessToken.getAccessToken());
                 Authentication authenticatedToken = authenticationManager.authenticate(accessToken);
@@ -79,8 +78,8 @@ public class ApiTokenValidationFilter extends GenericFilterBean {
         this.authenticationManager = authenticationManager;
     }
 
-    public void setTokenExtractionService(TokenExtractionService tokenExtractionService) {
-        this.tokenExtractionService = tokenExtractionService;
+    public void setTokenService(TokenService tokenService) {
+        this.tokenService = tokenService;
     }
 
     public void setAuthenticationSuccessHandler(AuthenticationSuccessHandler authenticationSuccessHandler) {

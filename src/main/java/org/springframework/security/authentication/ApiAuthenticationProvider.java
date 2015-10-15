@@ -3,8 +3,7 @@ package org.springframework.security.authentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.token.TokenNotFoundException;
-import org.springframework.security.authentication.token.TokenStorageService;
-import org.springframework.security.authentication.token.impl.MapTokenStorageService;
+import org.springframework.security.authentication.token.TokenService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +18,7 @@ public class ApiAuthenticationProvider implements AuthenticationProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(ApiAuthenticationProvider.class);
 
-    private TokenStorageService tokenStorageService = new MapTokenStorageService();
+    private TokenService tokenService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -28,16 +27,16 @@ public class ApiAuthenticationProvider implements AuthenticationProvider {
         String accessToken = authenticationToken.getAccessToken();
         if(accessToken != null){
             logger.debug("Attempting to validate token {}", accessToken);
-            UserDetails userDetails = tokenStorageService.loadUserByToken(accessToken);
+            UserDetails userDetails = tokenService.loadUserByToken(accessToken);
             if(userDetails != null){
-                return new ApiAuthenticationToken(accessToken, authenticationToken.getExpiration(), userDetails);
+                return new ApiAuthenticationToken(accessToken, authenticationToken.getExpiration(), userDetails, userDetails.getAuthorities());
             }
         }
         throw new TokenNotFoundException();
     }
 
-    public void setTokenStorageService(TokenStorageService tokenStorageService) {
-        this.tokenStorageService = tokenStorageService;
+    public void setTokenService(TokenService tokenService) {
+        this.tokenService = tokenService;
     }
 
     @Override
