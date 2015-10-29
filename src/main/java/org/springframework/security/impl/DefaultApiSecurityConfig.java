@@ -11,16 +11,16 @@ public class DefaultApiSecurityConfig implements ApiSecurityConfig {
 
     @Override
     public String loginEndpoint() {
-        return "login";
+        return "/api/login";
     }
 
     @Override
     public String validationEndpoint() {
-        return "validate";
+        return "/api/validate";
     }
 
     @Override
     public String logoutEndpoint() {
-        return "logout";
+        return "/api/logout";
     }
 }

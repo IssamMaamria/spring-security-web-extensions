@@ -28,10 +28,9 @@ public interface TokenService {
     /**
      * Extracts an {@link ApiAuthenticationToken} from the request.
      * @param request request, not null
-     * @return access token
-     * @throws TokenNotFoundException if token does not exist in request
+     * @return access token, can be null if a token could not be extracted for whatever reason
      */
-    ApiAuthenticationToken extractAccessToken(HttpServletRequest request) throws TokenNotFoundException;
+    ApiAuthenticationToken extractAccessToken(HttpServletRequest request);
 
     /**
      * Loads a {@link UserDetails} corresponding to the access token.

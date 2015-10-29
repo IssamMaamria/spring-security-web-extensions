@@ -41,6 +41,7 @@ public class ApiLogoutFilter extends GenericFilterBean {
                 servletResponse.setStatus (HttpServletResponse.SC_METHOD_NOT_ALLOWED);
             }
             else {
+                // TODO should this also be scoped inside the try/catch below
                 ApiAuthenticationToken accessToken = tokenService.extractAccessToken(servletRequest);
                 if(accessToken != null){
                     log.debug("Token found: {}", accessToken.getAccessToken());
